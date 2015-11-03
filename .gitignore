@@ -1,0 +1,14 @@
+.metadata/.lock
+.metadata/
+.recommenders/
+helloworld/.settings/
+helloworld/bin/
+tictactoe/bin/
+apples/bin/
+life/.settings/
+tictactoe/.settings/
+life/bin/
+A/.settings/
+Ab/.settings/
+P/.settings/
+apples/.settings/
