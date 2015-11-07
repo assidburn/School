@@ -4,25 +4,50 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 
-public class life {
+public class Life {
 
-	boolean[][] cells = new boolean[10][10];
-	JFrame frame = new JFrame("Life simulation");
-	lifepanel panel = new lifepanel(cells);
-	
-	public life() {
-		frame.setSize(600,600);
-		frame.setLayout(new BorderLayout());
-		frame.add(panel, BorderLayout.CENTER);
-		
-		//github
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
+	private boolean[][] grid;
+	private int maxcolumns;
+	private int maxrows;	
 
-		
+	public static void main(String[] args) {
+		Life x =  new Life(10,10);
+		for(int i = 0; i <5; ++i) {
+			x.step();	
+			x.display();
+		}
+
 	}
 	
-	public static void main(String[] args) {
-		new life();
-}
+	private void display() {
+		for(int i = 0; i <maxcolumns; ++i) {
+			for(int j = 0; j <maxrows; ++j) {
+				System.out.println(grid[i][j]);
+			}
+		}
+		
+		
+	}
+
+	/**
+	 * method will compute and display next generation of cells
+	 */
+	private void step() {
+	}
+
+	public Life (int maxcolumns, int maxrows) {
+		this.maxcolumns = maxcolumns;
+		this.maxrows = maxrows;
+		grid = new boolean [maxcolumns][maxrows];	
+	
+//		System.out.println(maxrows);
+//		System.out.println(maxcolumns);
+		
+		// initalize some set of cells
+		//step through 5 generations
+		//print each generation
+
+	}
+	
+	
 }
