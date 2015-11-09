@@ -1,9 +1,5 @@
 package a;
 
-import java.awt.Dimension;
-
-import javax.swing.JFrame;
-
 public class Main {
 
     public static Drawing mDrawing;

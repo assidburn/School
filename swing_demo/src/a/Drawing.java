@@ -9,6 +9,8 @@ import java.awt.RenderingHints;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+//derived from Oracle's Java tutorials
+
 public class Drawing extends JPanel {
 
 	private int mCellWidth = 20; 	// pixels per cell
@@ -40,6 +42,8 @@ public class Drawing extends JPanel {
         mFrame.setVisible(true);
 	}
 
+	private int where = 0;
+	
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -48,6 +52,9 @@ public class Drawing extends JPanel {
         int gridHeight = d.height / 2;
         
         g2.setColor(Color.blue);
-        g2.fillRect(mCellWidth * 2, mCellWidth, mCellHeight, mCellHeight);
+        g2.fillRect(mCellWidth * where, mCellHeight, mCellWidth, mCellHeight);
+        
+        if (++where >= mCols)
+        	where = 0;
     }
 }
