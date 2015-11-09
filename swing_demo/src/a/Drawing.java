@@ -17,23 +17,27 @@ public class Drawing extends JPanel {
 	private int mRows;
 	private int mCols;
 
+	JFrame mFrame;
+	
 	public Drawing (int rows, int cols) {
+		
+		super ();
 		
 		mRows = rows;
 		mCols = cols;
 		
         //Create and set up the drawing area
-        JFrame frame = new JFrame("Drawing");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mFrame = new JFrame("Drawing");
+        mFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
  
         //Create and set up the content pane.
         setOpaque(true); //content panes must be opaque
-        frame.setContentPane(this);
+        mFrame.setContentPane(this);
  
         //Display the window.
-        frame.setSize(new Dimension(mCols * mCellWidth, mRows * mCellHeight));
+        mFrame.setSize(new Dimension(mCols * mCellWidth, mRows * mCellHeight));
 //	        frame.pack();
-        frame.setVisible(true);
+        mFrame.setVisible(true);
 	}
 
     public void paint(Graphics g) {

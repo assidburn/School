@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 
 public class Main {
 
-    private static Drawing mDrawing;
+    public static Drawing mDrawing;
 	private static Controls mControls;
 
     public static void main(String[] args) {

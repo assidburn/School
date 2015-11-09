@@ -9,7 +9,8 @@ import javax.swing.*;
 public class Controls extends JPanel
 implements ActionListener {
 	    protected JButton b1, b2, b3;
-	 
+	    private JFrame mFrame;
+	    
 	    public Controls() {
 
 	    	//Create and set up the controls
@@ -33,6 +34,7 @@ implements ActionListener {
 	 
 	        //Listen for actions on buttons 1 and 3.
 	        b1.addActionListener(this);
+	        b2.addActionListener(this);
 	        b3.addActionListener(this);
 	 
 	        b1.setToolTipText("Click this button to disable the middle button.");
@@ -44,16 +46,16 @@ implements ActionListener {
 	        add(b2);
 	        add(b3);
 
-	        JFrame frame = new JFrame("Controls");
-	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	        mFrame = new JFrame("Controls");
+	        mFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	 
 	        //Create and set up the content pane.
 	        setOpaque(true); //content panes must be opaque
-	        frame.setContentPane(this);
+	        mFrame.setContentPane(this);
 	 
 	        //Display the window.
-	        frame.pack();
-	        frame.setVisible(true);	        
+	        mFrame.pack();
+	        mFrame.setVisible(true);	        
 	    }
 	 
 	    public void actionPerformed(ActionEvent e) {
@@ -61,11 +63,13 @@ implements ActionListener {
 	            b2.setEnabled(false);
 	            b1.setEnabled(false);
 	            b3.setEnabled(true);
-	        } else {
+	        } else if ("enable".equals(e.getActionCommand())) {
 	            b2.setEnabled(true);
 	            b1.setEnabled(true);
 	            b3.setEnabled(false);
 	        }
+	        
+	        Main.mDrawing.mFrame.repaint();
 	    }
 	 
 }
