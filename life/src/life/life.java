@@ -41,7 +41,17 @@ public class Life {
 		//2 or 3 neighbors - survives to next round
 		//4 or more neighbors - dies of overcrowding
 		//If dead 3 neighbors - becomes populated
-		
+		for(int row = 0; row <maxrows; ++row) {	
+			for(int column = 0; column <maxcolumns; ++column)				
+			{
+//				System.out.print(grid[row][column]);
+				
+				
+					System.out.println(neighbors(row, column));				
+				
+			}
+		}
+
 
 	}
 
@@ -50,9 +60,9 @@ public class Life {
 		this.maxrows = maxrows;
 		grid = new boolean [maxcolumns][maxrows];	
 		
-		grid[3][5] = true;
-		grid[3][6] = true;
-		grid[3][7] = true;
+		grid[0][0] = true;
+		grid[0][1] = true;
+		grid[0][2] = true;
 //		System.out.println(maxrows);
 //		System.out.println(maxcolumns);
 		
@@ -62,5 +72,34 @@ public class Life {
 
 	}
 	
+int neighbors(int r, int c){
+	int rm = r-1; 
+	if(rm < 0)
+		rm = maxrows -1;
+	int cm = c-1; 
+	if(cm <  0)
+		cm = maxcolumns -1;
+	int rp = r+1; 
+	if(rp >= maxrows)
+		rp = 0;
+	int cp = c+1;
+	if(cp >= maxcolumns)
+		cp = 0;
+	
+	int a =  f(grid[rm][cm])+f(grid[rm][c])+f(grid[rm][cp])
+			+f(grid[r][cm])+f(grid[r][cp])
+			+f(grid[rp][cm])+f(grid[rp][c])+f(grid[rp][cp]);
+	return a;
+
+}
+
+private int f(boolean b) {
+	if(b) {
+		return 0;
+	}
+	return 0;
+	
 	
 }
+}
+
