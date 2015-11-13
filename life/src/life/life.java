@@ -36,18 +36,27 @@ public class Life {
 	 * method will compute and display next generation of cells
 	 */
 	private void step() {
+		
+		boolean[][] newGrid = new boolean [maxcolumns][maxrows];
+
 		//for each cell count number of neighbors
 		//0 or 1 neighbors - dies of loneliness
 		//2 or 3 neighbors - survives to next round
 		//4 or more neighbors - dies of overcrowding
-		//If dead 3 neighbors - becomes populated
+		//If dead and 3 neighbors - becomes populated
 		for(int row = 0; row <maxrows; ++row) {	
 			for(int column = 0; column <maxcolumns; ++column)				
+			
 			{
-//				System.out.print(grid[row][column]);
+				if(neighbors(row, column) < 1)				
+					newGrid[row][column] = false;//cell = false
+				if(grid[row][column] == true && (neighbors(row, column) == 2 || neighbors(row, column) == 3))	
+					newGrid[row][column] = true; //cells = true
+				if(neighbors(row, column) >= 4 )
+					newGrid[row][column] = false;//cells = false
+				if(grid[row][column] == false && (neighbors(row, column)  == 3))
+					newGrid[row][column] = true;//cells = true
 				
-				
-					System.out.println(neighbors(row, column));				
 				
 			}
 		}
@@ -66,7 +75,7 @@ public class Life {
 //		System.out.println(maxrows);
 //		System.out.println(maxcolumns);
 		
-		// initalize some set of cells
+		// initialize some set of cells
 		//step through 5 generations
 		//print each generation
 
@@ -86,20 +95,21 @@ int neighbors(int r, int c){
 	if(cp >= maxcolumns)
 		cp = 0;
 	
-	int a =  f(grid[rm][cm])+f(grid[rm][c])+f(grid[rm][cp])
-			+f(grid[r][cm])+f(grid[r][cp])
-			+f(grid[rp][cm])+f(grid[rp][c])+f(grid[rp][cp]);
+	int a =  convertToInt(grid[rm][cm])+convertToInt(grid[rm][c])+convertToInt(grid[rm][cp])
+			+convertToInt(grid[r][cm])+convertToInt(grid[r][cp])
+			+convertToInt(grid[rp][cm])+convertToInt(grid[rp][c])+convertToInt(grid[rp][cp]);
 	return a;
 
 }
 
-private int f(boolean b) {
+private int convertToInt(boolean b) {
 	if(b) {
-		return 0;
+		return 1;
 	}
 	return 0;
 	
 	
 }
+
 }
 
