@@ -4,19 +4,22 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.RenderingHints;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-//derived from Oracle's Java tutorials
+//derived from Oracle's Java tutorials and StackOverflow
 
 public class Drawing extends JPanel {
 
 	private int mCellWidth = 20; 	// pixels per cell
 	private int mCellHeight = 20;
 	
-	private int mRows;
+	private int mRows;				// max rows and cols we should draw
 	private int mCols;
 
 	JFrame mFrame;
@@ -36,10 +39,36 @@ public class Drawing extends JPanel {
         setOpaque(true); //content panes must be opaque
         mFrame.setContentPane(this);
  
-        //Display the window.
+        //Display the window, make large enough to hold grid
         mFrame.setSize(new Dimension(mCols * mCellWidth, mRows * mCellHeight));
 //	        frame.pack();
         mFrame.setVisible(true);
+
+        // Listen for mouse clicks
+        addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+          	  final Point pos = e.getPoint();
+          	  final int x = pos.x;
+          	  final int y = pos.y;
+          	  int row = x / mCellWidth;
+          	  int col = y / mCellHeight;
+          	  System.out.println(String.format("Click at %d, %d", row, col));
+            }
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+			}
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+			}
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+			}
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+			}
+        });
 	}
 
 	private int where = 0;
