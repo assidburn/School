@@ -10,7 +10,10 @@ public class Main {
         //creating and showing this application's GUI.
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
+            	// create the controls and drawing windows
             	mControls = new Controls();
+            	
+            	// number of rows and columns in the Life grid
             	mDrawing = new Drawing(20, 20);
             }
         });

@@ -26,6 +26,7 @@ implements ActionListener {
 	        b2.setVerticalTextPosition(AbstractButton.BOTTOM);
 	        b2.setHorizontalTextPosition(AbstractButton.CENTER);
 	        b2.setMnemonic(KeyEvent.VK_M);
+	        b2.setActionCommand("middle");
 	 
 	        b3 = new JButton("Enable middle button");
 	        //Use the default text position of CENTER, TRAILING (RIGHT).
@@ -56,6 +57,15 @@ implements ActionListener {
 	        //Display the window.
 	        mFrame.pack();
 	        mFrame.setVisible(true);	        
+	        
+	        int delay = 5000; //milliseconds
+	        ActionListener taskPerformer = new ActionListener() {
+	            public void actionPerformed(ActionEvent evt) {
+	            	System.out.println("timer fired");
+	            	// if running call life.step()
+	            }
+	        };
+	        new Timer(delay, taskPerformer).start();
 	    }
 	 
 	    public void actionPerformed(ActionEvent e) {
