@@ -8,7 +8,7 @@ public class Life {
 
 	public static void main(String[] args) {
 		Life x =  new Life(10,10);
-		for(int i = 0; i <1; ++i) {
+		for(int i = 0; i <4; ++i) {
 			x.step();	
 			x.display();
 		}
@@ -46,7 +46,6 @@ public class Life {
 		//If dead and 3 neighbors - becomes populated
 		for(int row = 0; row <maxrows; ++row) {	
 			for(int column = 0; column <maxcolumns; ++column)				
-			
 			{
 				if(neighbors(row, column) < 1)				
 					newGrid[row][column] = false;//cell = false
@@ -56,12 +55,10 @@ public class Life {
 					newGrid[row][column] = false;//cells = false
 				if(grid[row][column] == false && (neighbors(row, column)  == 3))
 					newGrid[row][column] = true;//cells = true
-				
-				
 			}
 		}
-
-
+		
+		grid = newGrid;
 	}
 
 	public Life (int maxcolumns, int maxrows) {
@@ -69,9 +66,9 @@ public class Life {
 		this.maxrows = maxrows;
 		grid = new boolean [maxcolumns][maxrows];	
 		
-		grid[0][0] = true;
-		grid[0][1] = true;
-		grid[0][2] = true;
+		grid[1][0] = true;
+		grid[1][1] = true;
+		grid[1][2] = true;
 //		System.out.println(maxrows);
 //		System.out.println(maxcolumns);
 		
