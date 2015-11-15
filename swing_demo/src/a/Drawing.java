@@ -80,10 +80,19 @@ public class Drawing extends JPanel {
         int gridWidth = d.width / 6;
         int gridHeight = d.height / 2;
         
-        g2.setColor(Color.blue);
-        g2.fillRect(mCellWidth * where, mCellHeight, mCellWidth, mCellHeight);
-        
-        if (++where >= mCols)
-        	where = 0;
+		for (int row = 0; row < Main.x.maxrows; ++row) {
+			for (int column = 0; column < Main.x.maxcolumns; ++column) {
+				// System.out.print(grid[row][column]);
+
+				if (Main.x.grid[row][column]) {
+					g2.setColor(Color.blue);
+				}
+				else {
+			        g2.setColor(Color.white);			    
+				}
+				
+				g2.fillRect(mCellWidth * column, mCellHeight * row, mCellWidth, mCellHeight);
+			}
+		}
     }
 }

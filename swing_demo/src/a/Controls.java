@@ -16,19 +16,19 @@ implements ActionListener {
 	    public Controls() {
 
 	    	//Create and set up the controls	 
-	        b1 = new JButton("Disable middle button");
+	        b1 = new JButton("RUN");
 	        b1.setVerticalTextPosition(AbstractButton.CENTER);
 	        b1.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
 	        b1.setMnemonic(KeyEvent.VK_D);
 	        b1.setActionCommand("disable");
 	 
-	        b2 = new JButton("Middle button");
+	        b2 = new JButton("STEP");
 	        b2.setVerticalTextPosition(AbstractButton.BOTTOM);
 	        b2.setHorizontalTextPosition(AbstractButton.CENTER);
 	        b2.setMnemonic(KeyEvent.VK_M);
 	        b2.setActionCommand("middle");
 	 
-	        b3 = new JButton("Enable middle button");
+	        b3 = new JButton("PAUSE");
 	        //Use the default text position of CENTER, TRAILING (RIGHT).
 	        b3.setMnemonic(KeyEvent.VK_E);
 	        b3.setActionCommand("enable");
@@ -62,7 +62,8 @@ implements ActionListener {
 	        ActionListener taskPerformer = new ActionListener() {
 	            public void actionPerformed(ActionEvent evt) {
 	            	System.out.println("timer fired");
-	            	// if running call life.step()
+	            	Main.x.step();
+	    	        Main.mDrawing.mFrame.repaint();
 	            }
 	        };
 	        new Timer(delay, taskPerformer).start();

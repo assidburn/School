@@ -1,10 +1,18 @@
 package life;
 
+import javax.swing.JFrame;
+
 public class Life {
 
+	
+	
+	
 	private boolean[][] grid;
 	private int maxcolumns;
 	private int maxrows;	
+	
+	JFrame frame = new JFrame("life simulation");
+	LifefePanel panel = new LifefePanel(grid);
 
 	public static void main(String[] args) {
 		Life x =  new Life(10,10);
@@ -68,7 +76,9 @@ public class Life {
 		
 		grid[1][0] = true;
 		grid[1][1] = true;
-		grid[1][2] = true;
+ 		grid[1][2] = true;
+		grid[2][1] = true;
+		grid[2][2] = true;
 //		System.out.println(maxrows);
 //		System.out.println(maxcolumns);
 		
