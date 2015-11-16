@@ -4,84 +4,96 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
-import javax.swing.*;        
+import javax.swing.*;
 
 // derived from Oracle's Java tutorials
 
-public class Controls extends JPanel
-implements ActionListener {
-	    protected JButton b1, b2, b3;
-	    private JFrame mFrame;
-	    
-	    public Controls() {
+public class Controls extends JPanel implements ActionListener {
+	protected JButton runButton, stepButton, pauseButton;
+	private JFrame mFrame;
 
-	    	//Create and set up the controls	 
-	        b1 = new JButton("RUN");
-	        b1.setVerticalTextPosition(AbstractButton.CENTER);
-	        b1.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
-	        b1.setMnemonic(KeyEvent.VK_D);
-	        b1.setActionCommand("disable");
-	 
-	        b2 = new JButton("STEP");
-	        b2.setVerticalTextPosition(AbstractButton.BOTTOM);
-	        b2.setHorizontalTextPosition(AbstractButton.CENTER);
-	        b2.setMnemonic(KeyEvent.VK_M);
-	        b2.setActionCommand("middle");
-	 
-	        b3 = new JButton("PAUSE");
-	        //Use the default text position of CENTER, TRAILING (RIGHT).
-	        b3.setMnemonic(KeyEvent.VK_E);
-	        b3.setActionCommand("enable");
-	        b3.setEnabled(false);
-	 
-	        //Listen for actions on the buttons
-	        b1.addActionListener(this);
-	        b2.addActionListener(this);
-	        b3.addActionListener(this);
-	 
-	        b1.setToolTipText("Click this button to disable the middle button.");
-	        b2.setToolTipText("This middle button repaints");
-	        b3.setToolTipText("Click this button to enable the middle button.");
-	 
-	        //Add Components to this container, using the default FlowLayout.
-	        add(b1);
-	        add(b2);
-	        add(b3);
+	boolean running = true;
 
-	        mFrame = new JFrame("Controls");
-	        mFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	 
-	        setOpaque(true); //content panes must be opaque
-	        mFrame.setContentPane(this);
-	 
-	        //Display the window.
-	        mFrame.pack();
-	        mFrame.setVisible(true);	        
-	        
-	        int delay = 5000; //milliseconds
-	        ActionListener taskPerformer = new ActionListener() {
-	            public void actionPerformed(ActionEvent evt) {
-	            	System.out.println("timer fired");
-	            	Main.x.step();
-	    	        Main.mDrawing.mFrame.repaint();
-	            }
-	        };
-	        new Timer(delay, taskPerformer).start();
-	    }
-	 
-	    public void actionPerformed(ActionEvent e) {
-	        if ("disable".equals(e.getActionCommand())) {
-	            b1.setEnabled(false);
-	            b2.setEnabled(false);
-	            b3.setEnabled(true);
-	        } else if ("enable".equals(e.getActionCommand())) {
-	            b1.setEnabled(true);
-	            b2.setEnabled(true);
-	            b3.setEnabled(false);
-	        }
+	public Controls() {
 
-	        // always repaint
-	        Main.mDrawing.mFrame.repaint();
-	    }
-	 
+		// Create and set up the controls
+		runButton = new JButton("RUN");
+		runButton.setVerticalTextPosition(AbstractButton.CENTER);
+		runButton.setHorizontalTextPosition(AbstractButton.LEADING); // aka LEFT, for
+																// left-to-right
+																// locales
+		runButton.setMnemonic(KeyEvent.VK_D);
+		runButton.setActionCommand("run");
+		runButton.setEnabled(false);
+
+		stepButton = new JButton("STEP");	
+		stepButton.setVerticalTextPosition(AbstractButton.BOTTOM);
+		stepButton.setHorizontalTextPosition(AbstractButton.CENTER);
+		stepButton.setMnemonic(KeyEvent.VK_M);
+		stepButton.setActionCommand("step");
+		stepButton.setEnabled(false);
+
+		pauseButton = new JButton("PAUSE");
+		// Use the default text position of CENTER, TRAILING (RIGHT).
+		pauseButton.setMnemonic(KeyEvent.VK_E);
+		pauseButton.setActionCommand("pause");
+		pauseButton.setEnabled(true);
+
+		// Listen for actions on the buttons
+		runButton.addActionListener(this);
+		stepButton.addActionListener(this);
+		pauseButton.addActionListener(this);
+
+		runButton.setToolTipText("Click this button to disable the middle button.");
+		stepButton.setToolTipText("This middle button repaints");
+		pauseButton.setToolTipText("Click this button to enable the middle button.");
+
+		// Add Components to this container, using the default FlowLayout.
+		add(runButton);
+		add(stepButton);
+		add(pauseButton);
+
+		mFrame = new JFrame("Controls");
+		mFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		setOpaque(true); // content panes must be opaque
+		mFrame.setContentPane(this);
+
+		// Display the window.
+		mFrame.pack();
+		mFrame.setVisible(true);
+
+		int delay = 100; // milliseconds
+		ActionListener taskPerformer = new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+
+				if (running) {
+					
+					Main.life.step();
+					Main.mDrawing.mFrame.repaint();
+				}
+				System.out.println("timer fired");
+			}
+		};
+		new Timer(delay, taskPerformer).start();
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		if ("pause".equals(e.getActionCommand())) {
+			runButton.setEnabled(true);
+			stepButton.setEnabled(true);
+			pauseButton.setEnabled(false);
+			running = false;
+		} else if ("run".equals(e.getActionCommand())) {
+			runButton.setEnabled(false);
+			stepButton.setEnabled(false);
+			pauseButton.setEnabled(true);
+			running = true;
+		}
+		else if ("step".equals(e.getActionCommand())) {
+		Main.life.step();
+		Main.mDrawing.mFrame.repaint();
+		}
+	}
+
 }

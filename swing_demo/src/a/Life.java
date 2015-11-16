@@ -64,11 +64,13 @@ public class Life {
 		this.maxrows = maxrows;
 		grid = new boolean[maxcolumns][maxrows];
 
-		grid[1][0] = true;
-		grid[1][1] = true;
-		grid[1][2] = true;
-		grid[2][1] = true;
-		grid[2][2] = true;
+		grid[19][1] = true;
+		grid[19][3] = true;
+		grid[19][2] = true;
+		grid[5][17] = true;
+		grid[5][18] = true;
+		grid[5][19] = true;
+		
 		// System.out.println(maxrows);
 		// System.out.println(maxcolumns);
 

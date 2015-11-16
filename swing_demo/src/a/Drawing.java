@@ -16,8 +16,8 @@ import javax.swing.JPanel;
 
 public class Drawing extends JPanel {
 
-	private int mCellWidth = 20; 	// pixels per cell
-	private int mCellHeight = 20;
+	private int mCellWidth = 5; 	// pixels per cell
+	private int mCellHeight = 5;
 	
 	private int mRows;				// max rows and cols we should draw
 	private int mCols;
@@ -40,7 +40,7 @@ public class Drawing extends JPanel {
         mFrame.setContentPane(this);
  
         //Display the window, make large enough to hold grid
-        mFrame.setSize(new Dimension(mCols * mCellWidth, mRows * mCellHeight));
+        mFrame.setSize(new Dimension(mCols * mCellWidth + 20, mRows * mCellHeight + 50));
 //	        frame.pack();
         mFrame.setVisible(true);
 
@@ -51,11 +51,16 @@ public class Drawing extends JPanel {
           	  final Point pos = e.getPoint();
           	  final int x = pos.x;
           	  final int y = pos.y;
-          	  int row = x / mCellWidth;
-          	  int col = y / mCellHeight;
+          	  int row = y / mCellHeight;
+          	  int col = x / mCellWidth;
           	  System.out.println(String.format("Click at %d, %d", row, col));
+          	  if(Main.life.grid[row][col]) {
+          		  Main.life.grid[row][col] = false;
+          	  }else 
+          		  Main.life.grid[row][col] = true;
+      		Main.mDrawing.mFrame.repaint();
             }
-
+            
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
 			}
@@ -80,11 +85,11 @@ public class Drawing extends JPanel {
         int gridWidth = d.width / 6;
         int gridHeight = d.height / 2;
         
-		for (int row = 0; row < Main.x.maxrows; ++row) {
-			for (int column = 0; column < Main.x.maxcolumns; ++column) {
+		for (int row = 0; row < Main.life.maxrows; ++row) {
+			for (int column = 0; column < Main.life.maxcolumns; ++column) {
 				// System.out.print(grid[row][column]);
 
-				if (Main.x.grid[row][column]) {
+				if (Main.life.grid[row][column]) {
 					g2.setColor(Color.blue);
 				}
 				else {

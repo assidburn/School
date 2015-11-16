@@ -6,11 +6,11 @@ public class Main {
 	
     public static Drawing mDrawing;
 	private static Controls mControls;
-	public static Life x;
+	public static Life life;
 
     public static void main(String[] args) {
     	
-    	x =  new Life(10,10);
+    	life =  new Life(100,100);
     	
         //Schedule a job for the event-dispatching thread:
         //creating and showing this application's GUI.
@@ -20,7 +20,7 @@ public class Main {
             	mControls = new Controls();
             	
             	// number of rows and columns in the Life grid
-            	mDrawing = new Drawing(20, 20);
+            	mDrawing = new Drawing(100, 100);
             }
         });
     }
