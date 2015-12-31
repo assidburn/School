@@ -52,7 +52,60 @@ class Game
         Cafeteria = new Room ("in the cafeteria");
         OneHallGalbraithRoom = new Room ("In 1 hall outside of mr G's room");
         GalbraithRoom = new Room ("You're a cool kid because you are in Mr G's room");
-        OneHallFHall + new Room ("in one hall by f hall")
+        OneHallFHall = new Room ("in one hall by f hall");
+         FHall = new Room ("in f hall");
+        OneHallGHall = new Room ("standing in ine hall by g hall");
+        GHall = new Room ("standing in g hall");
+        OneHallHHall = new Room ("standing in one hall by h hall");
+        HHall = new Room ("standing in h hall");
+        OutsideUndercover = new Room ("standing outside undercover");
+        OutsideTables = new Room ("standing outside by the tables");
+        PilleteRoom = new Room ("In mr pilettes room");
+        
+       
+        
+       Awing.setExit ("south", OneHallMainHall);
+       OneHallMainHall.setExit ("north", Awing);
+       MainHall.setExit ("west", OneHallMainHall);
+       OneHallMainHall.setExit ("east", MainHall);
+       OneHallMainHall.seExit ("south", OneHallGalbraithRoom);
+       OneHallGalbraithRoom.setExit ("north", OneHallMainHall);
+       OneHallMainHall.setExit ("west", Commons);
+       Commons.setExit ("east", OneHallMainHall);
+       Commons.setExit ("south", Cafeteria);
+       Cafeteria.setExit ("north", Commons);
+       Cafeteria.setExit ("east", OneHallGalbraithRoom);
+       OneHallGalbraithRoom.setExit ("west", GalbraithRoom);
+       OneHallGalbraithRoom.setExit ("west", Cafeteria);
+       GalbraithRoom.setExit ("east", OneHallGalbraithRoom);
+       OneHallGalbraithRoom.setExit ("south", OneHallFHall);
+       OneHallFHall.setExit ("north", OneHallGalbraithRoom);
+       OneHallFHall.setExit ("east", FHall);
+       FHall.setExit ("west", OneHallFHall); 
+       OneHallFHall.setExit("south", OneHallGHall);
+       OneHallGHall.setExit ("north", OneHallFHall);
+       OneHallGHall.setExit ("east", GHall);
+       GHall.setExit ("west", OneHallGHall);
+       OneHallGHall.setExit ("south", OneHallHHall);
+       OneHallHHall.setExit ("north", OneHallGHall);
+       OneHallHHall.setExit ("east", HHall);
+       HHall.setExit ("west", OneHallHHall);
+       OneHallHHall.setExit ("north", OneHallGHall);
+       OneHallHHall.setExit ("south", OutsideUndercover);
+       OneHallHHall.setExit ("west", PilleteRoom);
+       PiletteRoom.setExit ("east", OneHallHHall);
+       OutsideUndercover.setExit ("north", OneHallHHall);
+       OutsideUndercover.setExit ("west", OutsideTables);
+       OutsideTables.setExit ("east", OutsideUndercover);
+       OutsideTables.setExit ("north", PilleteRoom);
+       PilleteRoom.setExit ("south", OutsideTables);
+       
+       
+       
+       
+       
+       
+        
         
         // initialise room exits
         //outside.setExit("east", theatre);
