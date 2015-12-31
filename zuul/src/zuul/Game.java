@@ -39,28 +39,28 @@ class Game
         Room outside, theatre, pub, lab, office;
       
         // create the rooms
-        //outside = new Room("outside the main entrance of the university");
-        //theatre = new Room("in a lecture theatre");
-        //pub = new Room("in the campus pub");
-        //lab = new Room("in a computing lab");
-        //office = new Room("in the computing admin office");
-        Awing = new Room("in A Wing");
-        Bathroom = new Room (" in boys bathroom");
-        Commons = new Room("In the lower commons");
-        OneHallMainHall = new Room ("In One hall by main hall");
-        MainHall = new Room ("in main hall");
-        Cafeteria = new Room ("in the cafeteria");
-        OneHallGalbraithRoom = new Room ("In 1 hall outside of mr G's room");
-        GalbraithRoom = new Room ("You're a cool kid because you are in Mr G's room");
-        OneHallFHall = new Room ("in one hall by f hall");
-         FHall = new Room ("in f hall");
-        OneHallGHall = new Room ("standing in ine hall by g hall");
-        GHall = new Room ("standing in g hall");
-        OneHallHHall = new Room ("standing in one hall by h hall");
-        HHall = new Room ("standing in h hall");
-        OutsideUndercover = new Room ("standing outside undercover");
-        OutsideTables = new Room ("standing outside by the tables");
-        PilleteRoom = new Room ("In mr pilettes room");
+        outside = new Room("outside the main entrance of the university");
+        theatre = new Room("in a lecture theatre");
+        pub = new Room("in the campus pub");
+        lab = new Room("in a computing lab");
+        office = new Room("in the computing admin office");
+        Room Awing = new Room("in A Wing");
+        Room Bathroom = new Room (" in boys bathroom");
+        Room Commons = new Room("In the lower commons");
+        Room OneHallMainHall = new Room ("In One hall by main hall");
+        Room MainHall = new Room ("in main hall");
+        Room Cafeteria = new Room ("in the cafeteria");
+        Room OneHallGalbraithRoom = new Room ("In 1 hall outside of mr G's room");
+        Room GalbraithRoom = new Room ("You're a cool kid because you are in Mr G's room");
+        Room OneHallFHall = new Room ("in one hall by f hall");
+        Room FHall = new Room ("in f hall");
+        Room OneHallGHall = new Room ("standing in ine hall by g hall");
+        Room GHall = new Room ("standing in g hall");
+        Room OneHallHHall = new Room ("standing in one hall by h hall");
+        Room HHall = new Room ("standing in h hall");
+        Room OutsideUndercover = new Room ("standing outside undercover");
+        Room OutsideTables = new Room ("standing outside by the tables");
+        Room PilleteRoom = new Room ("In mr pilettes room");
         
        
         
@@ -68,7 +68,7 @@ class Game
        OneHallMainHall.setExit ("north", Awing);
        MainHall.setExit ("west", OneHallMainHall);
        OneHallMainHall.setExit ("east", MainHall);
-       OneHallMainHall.seExit ("south", OneHallGalbraithRoom);
+       OneHallMainHall.setExit ("south", OneHallGalbraithRoom);
        OneHallGalbraithRoom.setExit ("north", OneHallMainHall);
        OneHallMainHall.setExit ("west", Commons);
        Commons.setExit ("east", OneHallMainHall);
@@ -93,7 +93,7 @@ class Game
        OneHallHHall.setExit ("north", OneHallGHall);
        OneHallHHall.setExit ("south", OutsideUndercover);
        OneHallHHall.setExit ("west", PilleteRoom);
-       PiletteRoom.setExit ("east", OneHallHHall);
+       PilleteRoom.setExit ("east", OneHallHHall);
        OutsideUndercover.setExit ("north", OneHallHHall);
        OutsideUndercover.setExit ("west", OutsideTables);
        OutsideTables.setExit ("east", OutsideUndercover);
@@ -108,25 +108,25 @@ class Game
         
         
         // initialise room exits
-        //outside.setExit("east", theatre);
-        //outside.setExit("south", lab);
-        //outside.setExit("west", pub);
+        outside.setExit("east", theatre);
+        outside.setExit("south", lab);
+        outside.setExit("west", pub);
 
-        //theatre.setExit("west", outside);
-        //theatre.setExit("south", office);
+        theatre.setExit("west", outside);
+        theatre.setExit("south", office);
         
-        //pub.setExit("east", outside);
+        pub.setExit("east", outside);
 
-        //lab.setExit("north", outside);
-        //lab.setExit("east", office);
+        lab.setExit("north", outside);
+        lab.setExit("east", office);
 
-        //office.setExit("west", lab);
-        //ffice.setExit("north", theatre);
+        office.setExit("west", lab);
+        office.setExit("north", theatre);
         
-        //currentRoom = outside;  // start game A Wing
+        currentRoom = outside;  // start game A Wing
     }
 
-    /**
+    /*
      *  Main play routine.  Loops until end of play.
      */
     public void play() 
@@ -176,6 +176,8 @@ class Game
             printHelp();
         else if (commandWord.equals("go"))
             goRoom(command);
+        else if (commandWord.equals("PickUp"))
+            pickup(command);
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }
@@ -198,6 +200,14 @@ class Game
         parser.showCommands();
     }
 
+    private void pickup(Command command) 
+    {
+      // make sure command.secondWord is valid
+    	// pickup command.secondWord
+    	//   remvoe it from room
+    	//   add it to player
+    }
+    
     /** 
      * Try to go to one direction. If there is an exit, enter the new
      * room, otherwise print an error message.
