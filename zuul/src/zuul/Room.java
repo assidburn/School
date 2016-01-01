@@ -1,8 +1,10 @@
 package zuul;
 
 import java.util.Set;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 /*
  * Class Room - a room in an adventure game.
@@ -22,7 +24,8 @@ class Room
 {
     private String description;
     private HashMap exits;        // stores exits of this room.
-
+    private List<Item> items;     // stores items in this room.
+    
     /**
      * Create a room described "description". Initially, it has no exits.
      * "description" is something like "in a kitchen" or "in an open court 
@@ -32,6 +35,7 @@ class Room
     {
         this.description = description;
         exits = new HashMap();
+        items = new ArrayList<Item>();			// Dad what is this?
     }
 
     /**
@@ -63,7 +67,7 @@ class Room
 
     /**
      * Return a string describing the room's exits, for example
-     * "Exits: north west".
+     * "Exits: north west. Items: a, b, c".
      */
     private String getExitString()
     {
@@ -71,6 +75,11 @@ class Room
         Set keys = exits.keySet();
         for(Iterator iter = keys.iterator(); iter.hasNext(); )
             returnString += " " + iter.next();
+        
+        returnString += ".  Items: ";
+        for(Item i : this.items)
+            returnString += i.name;
+        
         return returnString;
     }
 
@@ -82,5 +91,29 @@ class Room
     {
         return (Room)exits.get(direction);
     }
+
+    /**
+     * add an item to this room
+     * @param item
+     */
+	public void addItem(Item item) {
+		items.add(item);
+	}
+	public Item takeItem (String item) {
+        for(Item i : this.items)
+        	if (i.name.equals(item)) {
+        		items.remove(i);
+        		return i;
+        	}
+        return null;
+	}
+
+	public boolean hasItem(String item) {
+        for(Item i : this.items)
+        	if (i.name.equals(item))
+        		return true;
+
+        return false;
+	}
 }
 

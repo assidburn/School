@@ -1,5 +1,8 @@
 package zuul;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *  This class is the main class of the "World of Zuul" application. 
  *  "World of Zuul" is a very simple, text based adventure game.  Users 
@@ -21,14 +24,17 @@ class Game
 {
     private Parser parser;
     private Room currentRoom;
+	private List<Item> myItems;
         
     /**
      * Create the game and initialise its internal map.
      */
     public Game() 
     {
+    	myItems = new ArrayList<Item>();
         createRooms();
         parser = new Parser();
+        
     }
 
     /**
@@ -123,6 +129,8 @@ class Game
         office.setExit("west", lab);
         office.setExit("north", theatre);
         
+        pub.addItem(new Item ("fred"));
+        
         currentRoom = outside;  // start game A Wing
     }
 
@@ -178,6 +186,8 @@ class Game
             goRoom(command);
         else if (commandWord.equals("PickUp"))
             pickup(command);
+        else if (commandWord.equals("drop"))
+            drop(command);
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }
@@ -202,12 +212,42 @@ class Game
 
     private void pickup(Command command) 
     {
-      // make sure command.secondWord is valid
-    	// pickup command.secondWord
-    	//   remvoe it from room
-    	//   add it to player
+        if( ! command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            System.out.println("Pickup what?");
+            return;
+        }
+
+        String thing = command.getSecondWord();
+
+        if ( ! currentRoom.hasItem (thing)) {
+            System.out.println("Pickup what?");
+            return;
+        }
+
+        Item i = currentRoom.takeItem(thing);
+
+        myItems.add(i);
     }
     
+    private void drop(Command command) 
+    {
+        if( ! command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            System.out.println("Drop what?");
+            return;
+        }
+
+        String thing = command.getSecondWord();
+
+        for(Item i : myItems)
+        	if (i.name.equals(thing)) {
+        		myItems.remove(i);
+        		currentRoom.addItem(i);
+        		return;
+        	}
+    }
+
     /** 
      * Try to go to one direction. If there is an exit, enter the new
      * room, otherwise print an error message.
