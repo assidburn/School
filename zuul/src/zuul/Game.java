@@ -45,13 +45,13 @@ class Game
         Room outside, theatre, pub, lab, office;
       
         // create the rooms
-        outside = new Room("outside the main entrance of the university");
-        theatre = new Room("in a lecture theatre");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
-        office = new Room("in the computing admin office");
+        //outside = new Room("outside the main entrance of the university");
+        //theatre = new Room("in a lecture theatre");
+        //pub = new Room("in the campus pub");
+        //lab = new Room("in a computing lab");
+        //office = new Room("in the computing admin office");
         Room Awing = new Room("in A Wing");
-        Room Bathroom = new Room (" in boys bathroom");
+        Room Bathroom = new Room ("in boys bathroom");
         Room Commons = new Room("In the lower commons");
         Room OneHallMainHall = new Room ("In One hall by main hall");
         Room MainHall = new Room ("in main hall");
@@ -69,7 +69,9 @@ class Game
         Room PilleteRoom = new Room ("In mr pilettes room");
         
        
-        
+       MainHall.setExit("north", Bathroom);
+       Bathroom.setExit("south", MainHall);
+      
        Awing.setExit ("south", OneHallMainHall);
        OneHallMainHall.setExit ("north", Awing);
        MainHall.setExit ("west", OneHallMainHall);
@@ -81,9 +83,9 @@ class Game
        Commons.setExit ("south", Cafeteria);
        Cafeteria.setExit ("north", Commons);
        Cafeteria.setExit ("east", OneHallGalbraithRoom);
-       OneHallGalbraithRoom.setExit ("west", GalbraithRoom);
+       OneHallGalbraithRoom.setExit ("east", GalbraithRoom);
        OneHallGalbraithRoom.setExit ("west", Cafeteria);
-       GalbraithRoom.setExit ("east", OneHallGalbraithRoom);
+       GalbraithRoom.setExit ("west", OneHallGalbraithRoom);
        OneHallGalbraithRoom.setExit ("south", OneHallFHall);
        OneHallFHall.setExit ("north", OneHallGalbraithRoom);
        OneHallFHall.setExit ("east", FHall);
@@ -114,24 +116,25 @@ class Game
         
         
         // initialise room exits
-        outside.setExit("east", theatre);
-        outside.setExit("south", lab);
-        outside.setExit("west", pub);
+        //outside.setExit("east", theatre);
+        //outside.setExit("south", lab);
+        //outside.setExit("west", pub);
 
-        theatre.setExit("west", outside);
-        theatre.setExit("south", office);
+        //theatre.setExit("west", outside);
+        //theatre.setExit("south", office);
         
-        pub.setExit("east", outside);
+        //pub.setExit("east", outside);
 
-        lab.setExit("north", outside);
-        lab.setExit("east", office);
+        //lab.setExit("north", outside);
+        //lab.setExit("east", office);
 
-        office.setExit("west", lab);
-        office.setExit("north", theatre);
+        //office.setExit("west", lab);
+        //office.setExit("north", theatre);
         
-        pub.addItem(new Item ("fred"));
+        OutsideTables.addItem(new Item ("fred"));
         
-        currentRoom = outside;  // start game A Wing
+        currentRoom = Awing;  // start game A Wing
+        currentRoom = OutsideTables;
     }
 
     /*
@@ -187,7 +190,7 @@ class Game
         else if (commandWord.equals("PickUp"))
             pickup(command);
         else if (commandWord.equals("drop"))
-            drop(command);
+        	wantToQuit = drop(command);
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }
@@ -230,12 +233,12 @@ class Game
         myItems.add(i);
     }
     
-    private void drop(Command command) 
+    private boolean drop(Command command) 
     {
         if( ! command.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
             System.out.println("Drop what?");
-            return;
+            return false;
         }
 
         String thing = command.getSecondWord();
@@ -244,8 +247,13 @@ class Game
         	if (i.name.equals(thing)) {
         		myItems.remove(i);
         		currentRoom.addItem(i);
-        		return;
+        		if(currentRoom.getShortDescription() == "in boys bathroom")
+        			return true;
+        		else
+        			return false;
+        			
         	}
+		return false;
     }
 
     /** 
