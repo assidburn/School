@@ -132,6 +132,10 @@ class Game
         //office.setExit("north", theatre);
         
         OutsideTables.addItem(new Item ("fred"));
+        FHall.addItem(new Item ("george"));
+        HHall.addItem(new Item ("GeneralSinclair"));
+        GHall.addItem(new Item ("barnaby waters"));
+        Cafeteria.addItem(new Item ("adrian beaky"));
         
         currentRoom = Awing;  // start game A Wing
         currentRoom = OutsideTables;
@@ -247,10 +251,12 @@ class Game
         	if (i.name.equals(thing)) {
         		myItems.remove(i);
         		currentRoom.addItem(i);
+        		if(thing.equals("fred")) {
         		if(currentRoom.getShortDescription() == "in boys bathroom")
         			return true;
         		else
         			return false;
+        		}
         			
         	}
 		return false;
