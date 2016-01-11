@@ -183,24 +183,32 @@ class Game {
 		else if (commandWord.equals("drop"))
 			wantToQuit = drop(command);
 		else if (commandWord.equals("quit")) {
-			wantToQuit = quit(command);}
-			else if (commandWord.equals("show")) {
-				wantToQuit = show(command);
+			wantToQuit = quit(command);
+		} else if (commandWord.equals("show")) {
+			wantToQuit = show(command);
 		}
 		return wantToQuit;
 	}
 
 	// implementations of user commands:
-
+	/**
+	 * checks too see if there is anything in myItems and if there is it shows
+	 * what there is
+	 * 
+	 * @param command
+	 * @return
+	 */
 	private boolean show(Command command) {
 		// TODO Auto-generated method stub
-		String returnString = ".  show ";
+		String returnString = "";
 		for (Item i : myItems)
-			returnString += i.name;
-		System.out.println(returnString);
-		
-		
-		
+			returnString += i.name + ". ";
+
+		if (returnString.length() == 0)
+			System.out.println("You have nada");
+		else
+			System.out.println("You have " + returnString);
+
 		return false;
 	}
 
@@ -216,6 +224,12 @@ class Game {
 		parser.showCommands();
 	}
 
+	/**
+	 * checks to see if there is an item in the current room and if there is you
+	 * may add it to myItems and removes it from the room
+	 * 
+	 * @param command
+	 */
 	private void pickup(Command command) {
 		if (!command.hasSecondWord()) {
 			// if there is no second word, we don't know where to go...
@@ -235,6 +249,13 @@ class Game {
 		myItems.add(i);
 	}
 
+	/**
+	 * drops whatever the second word is, checks too see if you dropped fred and
+	 * you are in the bathroom then it ends the game
+	 * 
+	 * @param command
+	 * @return
+	 */
 	private boolean drop(Command command) {
 		if (!command.hasSecondWord()) {
 			// if there is no second word, we don't know where to go...
@@ -252,6 +273,7 @@ class Game {
 				}
 			}
 
+		// takes the item out of myItems and adds it to the room you are in
 		for (Item i : myItems)
 			if (i.name.equals(thing)) {
 				myItems.remove(i);
